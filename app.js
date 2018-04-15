@@ -12,6 +12,12 @@ const users = require('./routes/users');
 
 const books = require('./routes/books');
 
+const reviews = require('./routes/reviews');
+
+const shoppingCarts = require('./routes/shoppingCarts');
+
+const transactions = require('./routes/transactions');
+
 
 // Connect to Database
 mongoose.connect(config.database);
@@ -48,6 +54,12 @@ require('./config/passport')(passport);
 app.use('/users', users);
 
 app.use('/books', books);
+
+app.use('/reviews', reviews);
+
+app.use('/shoppingCarts', shoppingCarts);
+
+app.use('/transactions', transactions);
 
 //Index Route
 app.get('/', (req, res) =>{

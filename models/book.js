@@ -61,4 +61,8 @@ module.exports.addBook = function(newBook, callback){
     newBook.save(callback);
 }
 
+module.exports.addReviewToBook = function (newReview, book, callback) {
+    book.reviews.push(newReview);
+    book.save(callback);
+}
 

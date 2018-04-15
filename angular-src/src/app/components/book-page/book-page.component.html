@@ -1,8 +1,37 @@
-<h2>Book details</h2>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div *ngIf="book">
-        <h2 class="page=header">Welcome to the Group:</h2>
-          <ul class="list-group">
-            <li class="list-group-item">Title: {{book.title}}</li>
-          </ul>
-      </div>
+  <h2 class="page=header">{{book.title}}</h2>
+</div>
+<br>
+<h2>Buy book</h2>
+<button (click)=addToShoppingCart()></button>
+
+<h2>Write a Review</h2>
+<div class="form-group">
+  <label>Rate the book from 0-5</label>
+  <input type="number" [(ngModel)]="starRating" id="starRating" step="0.1" max="5" placeholder="Rate 1 - 5" class="form-control">
+  <label>Write a review</label>
+  <textarea [(ngModel)]="comment" name="comment" rows="10" cols="30" class="form-control" align="right"></textarea>
+  <button (click)=reviewSubmit()></button>
+</div>
+
+<div *ngFor="let star of stars;">
+  <li>
+    <div class="fa fa-star" ng-value="true"></div>
+  </li>
+</div>
+
+<div *ngFor="let star of stars;">
+  <li>
+    <div class="fa fa-star" ng-value="true"></div>
+  </li>
+</div>
+
+<h2>Previous reviews</h2>
+
+<div *ngFor="let review of reviews;">
+  <li>{{review.comment}}</li>
+  <li>{{review.starRating}}</li>
+  <li>{{review.user}}</li>
+</div>

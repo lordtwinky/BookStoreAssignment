@@ -1,3 +1,25 @@
-<p>
-  view-customers works!
-</p>
+<h2>View all customer details</h2>
+
+<div>
+    <table class="table table-hover table-condensed">
+        <tr style="font-weight: bold">
+            <td>Username</td>
+            <td>Email</td>
+            <td>Shipping Address</td>
+
+        </tr>
+        <tr *ngFor="let user of users;let i = index;">
+            <td>
+                <a [routerLink]="['/UserPage', user._id]">
+                  {{user.username}}
+                </a>
+            </td>
+            <td>
+                {{user.email}}
+            </td>
+            <td>
+                {{user.shippingAddress}}
+            </td>
+        </tr>
+    </table>
+</div>

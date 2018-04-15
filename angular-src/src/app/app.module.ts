@@ -20,7 +20,8 @@ import { CreateBookComponent } from './components/create-book/create-book.compon
 import { BrowseBooksComponent } from './components/browse-books/browse-books.component';
 import { ViewCustomersComponent } from './components/view-customers/view-customers.component';
 import { BookPageComponent } from './components/book-page/book-page.component';
-
+import { UserPageComponent } from './components/user-page/user-page.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -31,7 +32,11 @@ const appRoutes: Routes = [
   {path: 'addBook', component: CreateBookComponent, canActivate:[AuthGuard]},
   {path: 'browseBooks', component: BrowseBooksComponent, canActivate:[AuthGuard]},
   {path: 'BookPage', component: BookPageComponent, canActivate:[AuthGuard]},
-  {path: 'BookPage/:id', component: BookPageComponent, canActivate:[AuthGuard]}
+  {path: 'BookPage/:id', component: BookPageComponent, canActivate:[AuthGuard]},
+  {path: 'browseUsers', component: ViewCustomersComponent, canActivate:[AuthGuard]},
+  {path: 'UserPage', component: UserPageComponent, canActivate:[AuthGuard]},
+  {path: 'UserPage/:id', component: UserPageComponent, canActivate:[AuthGuard]},
+  {path: 'shoppingCart', component: ShoppingCartComponent, canActivate:[AuthGuard]}
 ]
 
 @NgModule({
@@ -46,7 +51,9 @@ const appRoutes: Routes = [
     CreateBookComponent,
     BrowseBooksComponent,
     ViewCustomersComponent,
-    BookPageComponent
+    BookPageComponent,
+    UserPageComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

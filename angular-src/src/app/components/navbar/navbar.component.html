@@ -41,7 +41,20 @@
           <a [routerLink]="['/browseBooks']"> Browse books </a>
         </li>
 
-        <li *ngIf="authService.loggedIn()"><a (click)="onLogoutClick()" href="#">Logout</a></li>
+        <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a [routerLink]="['/browseUsers']"> View users </a>
+        </li>
+
+        <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/shoppingCart']"> Shopping cart </a>
+          </li>
+        
+
+
+
+        <li *ngIf="authService.loggedIn()">
+          <a (click)="onLogoutClick()" href="#">Logout</a>
+        </li>
       </ul>
 
     </div>

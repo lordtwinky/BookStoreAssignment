@@ -32,7 +32,11 @@ const UserSchema = mongoose.Schema({
     admin:{
         type:Boolean,
         required: true
-    }
+    },
+    transactions:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Transaction'
+    }]
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);
@@ -61,5 +65,10 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
         if(err) throw err;
         callback(null, isMatch);
     });
+}
+
+module.exports.addTransactionToUser = function (newTransaction, user, callback) {
+    user.transactions.push(newTransaction);
+    user.save(callback);
 }
 

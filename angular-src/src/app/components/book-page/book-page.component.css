@@ -1,0 +1,10 @@
+[ng-value$="true"] {
+  color: orange;
+}
+
+li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}

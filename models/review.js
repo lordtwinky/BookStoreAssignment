@@ -11,6 +11,10 @@ const ReviewSchema = mongoose.Schema({
     },
     comment :{
         type: String
+    },
+    user:{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 

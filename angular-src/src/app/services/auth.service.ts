@@ -94,4 +94,61 @@ export class AuthService {
     .map(res => res.json());
   }
 
+  addReview(bookRating){
+    let headers = new Headers();
+    return this.http.post('http://localhost:3000/reviews/addReview', bookRating, {headers: headers})
+    .map(res => res.json());
+  }
+
+  getReview(reviewID){
+    let headers = new Headers();
+    return this.http.post('http://localhost:3000/reviews/getReviewbyID', reviewID, {headers: headers})
+    .map(res => res.json());
+  }
+
+  getUsers(){
+    let headers = new Headers();
+    return this.http.get('http://localhost:3000/users/userList', {headers: headers})
+    .map(res => res.json());
+  }
+
+  getUserPage(userID){
+    let headers = new Headers();
+    return this.http.post('http://localhost:3000/users/getUserbyID', userID, {headers: headers})
+    .map(res => res.json());
+  }
+
+  getShoppingCart(shoppingCartID){
+    let headers = new Headers();
+    return this.http.post('http://localhost:3000/shoppingCarts/getShoppingCartbyID', shoppingCartID, {headers: headers})
+    .map(res => res.json());
+  }
+
+  addToShoppingCart(userIDBookID){
+    let headers = new Headers();
+    return this.http.post('http://localhost:3000/shoppingCarts/addBookToShoppingCart', userIDBookID, {headers: headers})
+    .map(res => res.json());
+  }
+
+  updateShoppingCartDelete(bookRemoveFromShoppingCart){
+    let headers = new Headers();
+    return this.http.put('http://localhost:3000/shoppingCarts/updateShoppingCartDelete', bookRemoveFromShoppingCart, {headers: headers})
+    .map(res => res.json());
+  }
+
+  updateShoppingCartPurchase(purchase){
+    let headers = new Headers();
+    return this.http.put('http://localhost:3000/shoppingCarts/ShoppingCartPurchase', purchase, {headers: headers})
+    .map(res => res.json());
+  }
+
+  createTransaction(transaction){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/transactions/createTransaction', transaction, {headers: headers})
+      .map(res => res.json());
+  }
+
+  
+
 }

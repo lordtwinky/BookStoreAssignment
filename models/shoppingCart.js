@@ -21,3 +21,7 @@ module.exports.addShoppingCart = function(newShoppingCart, callback){
     newShoppingCart.save(callback);
 }
 
+module.exports.addBookToShoppingCart = function (newBook, shoppingCart, callback) {
+    shoppingCart.books.push(newBook);
+    shoppingCart.save(callback);
+}

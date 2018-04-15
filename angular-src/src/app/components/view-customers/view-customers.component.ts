@@ -19,10 +19,10 @@ export class ViewCustomersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // //get users
-    // this.authService.getUsers().subscribe(data => {
-    //   this.users = data.users
-    // });
+    //get users
+    this.authService.getUsers().subscribe(data => {
+      this.users = data.users
+    });
   }
 
 }
