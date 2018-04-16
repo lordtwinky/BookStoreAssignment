@@ -24,6 +24,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { FilterByAuthorPipe } from './pipes/filter-by-author.pipe';
+import { CategoryFilterPipe } from './pipes/category-filter.pipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -56,7 +57,8 @@ const appRoutes: Routes = [
     ShoppingCartComponent,
     OrderByPipe,
     FilterPipe,
-    FilterByAuthorPipe
+    FilterByAuthorPipe,
+    CategoryFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule
   ],
-  providers: [ValidateService, AuthService, AuthGuard, OrderByPipe, FilterPipe, FilterByAuthorPipe],
+  providers: [ValidateService, AuthService, AuthGuard, OrderByPipe, FilterPipe, FilterByAuthorPipe, CategoryFilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

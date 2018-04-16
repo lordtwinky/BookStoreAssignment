@@ -1,5 +1,5 @@
 {
-  "name": "bookstoreapp",
+  "name": "bookstoreonline",
   "version": "1.0.0",
   "description": "Bookstore application that lets you create users, admin and books. Users can browse and purchase books through their shopping carts. Admins can add books and update customers",
   "main": "app.js",

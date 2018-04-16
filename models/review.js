@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const config = require('../config/database');
 var Schema = mongoose.Schema;
 
-
-//Game Schema
 const ReviewSchema = mongoose.Schema({
     starRating :{
         type: Number

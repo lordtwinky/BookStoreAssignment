@@ -16,7 +16,7 @@ export class CreateBookComponent implements OnInit {
   category: String;
   image: Number;
   stock: Number;
-  categories: Array<Object>;
+  categories: Array<Object> =[];
 
   constructor(
     private validateService: ValidateService,
@@ -26,16 +26,16 @@ export class CreateBookComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.categories = []
-    const category1 = { id: 1, name: "Comedy" };
-    const category2 = { id: 2, name: "Drama" };
-    const category3 = { id: 3, name: "Horror fiction" };
-    const category4 = { id: 4, name: "Romance" };
-    const category5 = { id: 4, name: "Satire" };
-    const category6 = { id: 4, name: "Tragedy" };
-    const category7 = { id: 4, name: "Fantasy" };
-    const category8 = { id: 4, name: "Adventure" };
-    this.categories.push(category1, category2, category3, category4, category5, category6, category7, category8)
+    function Category(id, name){
+      this.id = id;
+      this.name = name;
+    }
+
+    var categoryNames = ["Comedy", "Drama", "Horror fiction", "Romance", "Satire", "Tragedy", "Fantasy", "Adventure"]
+    for(var index = 0; index < categoryNames.length; index++){
+      var categoryObject = new Category(index+1, categoryNames[index]);
+      this.categories.push(categoryObject)
+    }
   }
 
   onCreateBookSubmit() {
@@ -47,7 +47,6 @@ export class CreateBookComponent implements OnInit {
       image: this.image,
       stock: this.stock
     }
-    console.log(this.image)
 
     //all fields must be filled in
     if (!this.validateService.validateBookCreate(book)) {

@@ -1,13 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const config = require('../config/database');
 const Book = require('../models/book');
 const Transaction = require('../models/transaction');
 const User = require('../models/user');
 
-//add book
+//add transaction
 router.post('/createTransaction', (req, res, next) => {
   const userID = req.body.userID;
     let newTransaction = new Transaction({

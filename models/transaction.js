@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const config = require('../config/database');
 var Schema = mongoose.Schema;
 
-//User Schema
 const TransactionSchema = mongoose.Schema({
     books: [{
         type: Schema.Types.ObjectId,

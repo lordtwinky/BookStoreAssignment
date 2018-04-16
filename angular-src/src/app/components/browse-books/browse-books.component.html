@@ -13,6 +13,12 @@
             <input type="text" [(ngModel)]="authorSearch" name="authorSearch" />
         </form>
     </div>
+    <div class="bar">
+        <form id="searchByAuthor">
+            <label> Search for Author: </label>
+            <input type="text" [(ngModel)]="authorSearch" name="authorSearch" />
+        </form>
+    </div>
     <br>
     <div class="bar">
         <label for="setting">Order ascending by:</label>
@@ -35,8 +41,11 @@
             <td style="width:0%" align="center">Edit</td>
 
         </tr>
+
         <tr *ngFor="let book of books | orderBy: attributeSelected | filter: titleSearch | filterByAuthor: authorSearch; let i = index">
+
             <td>
+
                 <input type="text" [(ngModel)]="book.title" name="title" class="input-title">
             </td>
             <td>
@@ -48,8 +57,8 @@
             <td>
                 <select [(ngModel)]="book.category" name="category" class="select-privacy" id="category" required>
                     <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-                        
-                      </select>
+
+                </select>
             </td>
             <td>
                 <input type="text" [(ngModel)]="book.image" name="image" class="input-image">
@@ -84,6 +93,14 @@
             <input type="text" [(ngModel)]="authorSearch" name="authorSearch" />
         </form>
     </div>
+    <div class="bar">
+        <form id="searchByCategory">
+            <label> Search for Category: </label>
+            <select [(ngModel)]="categorySearch" name="category" class="select-privacy" id="category" required>
+                <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+            </select>
+        </form>
+    </div>
     <br>
     <div class="bar">
         <label for="setting">Order ascending by:</label>
@@ -105,7 +122,7 @@
             <td>Stock</td>
 
         </tr>
-        <tr *ngFor="let book of books | orderBy: attributeSelected | filter: titleSearch | filterByAuthor: authorSearch; let i = index">
+        <tr *ngFor="let book of books | orderBy: attributeSelected | filter: titleSearch | filterByAuthor: authorSearch | categoryFilter: categorySearch; let i = index">
             <td>
                 <a [routerLink]="['/BookPage', book._id]">
                     {{book.title}}
@@ -118,7 +135,30 @@
                 {{book.price}}
             </td>
             <td>
-                {{book.category}}
+                <div *ngIf="book.category == 1">
+                    Comedy
+                </div>
+                <div *ngIf="book.category == 2">
+                    Drama
+                </div>
+                <div *ngIf="book.category == 3">
+                    Horror fiction
+                </div>
+                <div *ngIf="book.category == 4">
+                    Romance
+                </div>
+                <div *ngIf="book.category == 5">
+                    Satire
+                </div>
+                <div *ngIf="book.category == 6">
+                    Tragedy
+                </div>
+                <div *ngIf="book.category == 7">
+                    Fantasy
+                </div>
+                <div *ngIf="book.category == 8">
+                    Adventure
+                </div>
             </td>
             <td>
                 <div *ngIf="book.image == 1">

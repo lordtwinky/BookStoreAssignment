@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const config = require('../config/database');
 var Schema = mongoose.Schema;
 
-
-//Game Schema
 const BookSchema = mongoose.Schema({
     title :{
         type: String,

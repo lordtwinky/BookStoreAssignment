@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { FilterPipe } from '../../pipes/filter.pipe'
 import { FilterByAuthorPipe } from '../../pipes/filter-by-author.pipe'
 import { OrderByPipe } from '../../pipes/order-by.pipe'
+import { CategoryFilterPipe } from '../../pipes/category-filter.pipe'
+
 
 @Component({
   selector: 'app-browse-books',
@@ -17,7 +19,7 @@ export class BrowseBooksComponent implements OnInit {
   admin;
   attributesAscending = [];
   attributesDescending = [];
-  categories;
+  categories = [];
   
   constructor(
     private validateService: ValidateService,
@@ -26,7 +28,8 @@ export class BrowseBooksComponent implements OnInit {
     private router: Router,
     private filter: FilterPipe,
     private order: OrderByPipe,
-    private filterByAuthor: FilterPipe
+    private filterByAuthor: FilterPipe,
+    private categoryFilter: CategoryFilterPipe
   ) { }
 
   ngOnInit() {
@@ -42,32 +45,38 @@ export class BrowseBooksComponent implements OnInit {
       this.books = data.books
     });
 
-    //add the fields to order by that we would like the user to be able to sort (Ascending)
-    const attributesAscending1 = { name: "title" };
-    const attributesAscending2 = { name: "author" };
-    const attributesAscending3 = { name: "price" };
-    const attributesAscending4 = { name: "stock" };
-    const attributesAscending5 = { name: "category" };
-    this.attributesAscending.push(attributesAscending1, attributesAscending2, attributesAscending3, attributesAscending4, attributesAscending5)
 
-    //add the fields to order by that we would like the user to be able to sort (Descending)
-    const attributesDescending1 = { name: "-title" };
-    const attributesDescending2 = { name: "-author" };
-    const attributesDescending3 = { name: "-price" };
-    const attributesDescending4 = { name: "-stock" };
-    const attributesDescending5 = { name: "-category" };
-    this.attributesDescending.push(attributesDescending1, attributesDescending2, attributesDescending3, attributesDescending4, attributesDescending5)
+    function Category(id, name){
+      this.id = id;
+      this.name = name;
+    }
 
-    this.categories = []
-    const category1 = { id: 1, name: "Comedy" };
-    const category2 = { id: 2, name: "Drama" };
-    const category3 = { id: 3, name: "Horror fiction" };
-    const category4 = { id: 4, name: "Romance" };
-    const category5 = { id: 4, name: "Satire" };
-    const category6 = { id: 4, name: "Tragedy" };
-    const category7 = { id: 4, name: "Fantasy" };
-    const category8 = { id: 4, name: "Adventure" };
-    this.categories.push(category1, category2, category3, category4, category5, category6, category7, category8)
+    var categoryNames = ["Comedy", "Drama", "Horror fiction", "Romance", "Satire", "Tragedy", "Fantasy", "Adventure"]
+    for(var index = 0; index < categoryNames.length; index++){
+      var categoryObject = new Category(index+1, categoryNames[index]);
+      this.categories.push(categoryObject)
+    }
+
+    function Attribute(name, ascdesc){
+      if(ascdesc == "asc"){
+        this.name = name;
+      }
+      else{
+        this.name = "-" + name
+      }
+      
+    }
+
+    var attributesAscending = ["title", "author", "price", "stock", "category"]
+
+    for(var index = 0; index < attributesAscending.length; index++){
+      var attributeAscendingObject = new Attribute(attributesAscending[index], "asc");
+      this.attributesAscending.push(attributeAscendingObject)
+      var attributeDescendingObject = new Attribute(attributesAscending[index], "desc");
+      this.attributesDescending.push(attributeDescendingObject)
+    }
+
+
   }
 
   edit(book) {
