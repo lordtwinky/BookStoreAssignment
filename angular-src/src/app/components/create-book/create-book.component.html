@@ -17,6 +17,11 @@
   </div>
 
   <div class="form-group">
+      <label>Stock (number of books currently available)</label>
+      <input type="number" [(ngModel)]="stock" name="stock" class="form-control">
+    </div>
+
+  <div class="form-group">
     <label>Category</label>
     <select [(ngModel)]="category" name="category" class="select-privacy" id="category" required>
         <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
@@ -24,14 +29,31 @@
   </div>
 
   <div class="form-group">
-    <label>Image</label>
-    <input type="number" [(ngModel)]="image" name="image" class="form-control">
+    <label>Associated Image</label><br>
+    <label>
+        <input type="radio" [(ngModel)]="image" name="image" class="form-control" id="book1" value=1>
+        <img src="../../../assets/book1.png" style="width:100px;height:100px;">
+    </label>
+    <label>
+        <input type="radio" [(ngModel)]="image" name="image" class="form-control" id="book2" value=2>
+        <img src="../../../assets/book2.png" style="width:100px;height:100px;">
+    </label>
+    <label>
+        <input type="radio" [(ngModel)]="image" name="image" class="form-control" id="book3" value=3>
+        <img src="../../../assets/book3.png" style="width:100px;height:100px;">
+    </label>
+    <label>
+        <input type="radio" [(ngModel)]="image" name="image" class="form-control" id="book4" value=4>
+        <img src="../../../assets/book4.png" style="width:100px;height:100px;">
+    </label>
+    <label>
+        <input type="radio" [(ngModel)]="image" name="image" class="form-control" id="book5" value=5>
+        <img src="../../../assets/book5.png" style="width:100px;height:100px;">
+    </label>
+    
+
   </div>
 
-  <div class="form-group">
-    <label>Stock (number of books currently available)</label>
-    <input type="number" [(ngModel)]="stock" name="stock" class="form-control">
-  </div>
 
   <input type="submit" class="btn btn-primary" value="Submit">
 

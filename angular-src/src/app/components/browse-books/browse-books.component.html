@@ -30,7 +30,7 @@
             <td style="width:75%" align="center">Author</td>
             <td style="width:18%" align="center">Price</td>
             <td style="width:0%" align="center">Category</td>
-            <td style="width:0%" align="center">Image</td>
+            <td style="width:0%" align="center">Image Number (1-5)</td>
             <td style="width:0%" align="center">Stock</td>
             <td style="width:0%" align="center">Edit</td>
 
@@ -43,10 +43,13 @@
                 <input type="text" [(ngModel)]="book.author" name="author" class="input-author">
             </td>
             <td>
-                <input type="text" [(ngModel)]="book.price" name="price" class="input-price">
+                <input type="number" [(ngModel)]="book.price" name="price" class="input-price">
             </td>
             <td>
-                <input type="text" [(ngModel)]="book.category" name="category" class="input-category">
+                <select [(ngModel)]="book.category" name="category" class="select-privacy" id="category" required>
+                    <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                        
+                      </select>
             </td>
             <td>
                 <input type="text" [(ngModel)]="book.image" name="image" class="input-image">
@@ -118,7 +121,21 @@
                 {{book.category}}
             </td>
             <td>
-                {{book.image}}
+                <div *ngIf="book.image == 1">
+                    <img src="../../../assets/book1.png" style="width:100px;height:100px;">
+                </div>
+                <div *ngIf="book.image == 2">
+                    <img src="../../../assets/book2.png" style="width:100px;height:100px;">
+                </div>
+                <div *ngIf="book.image == 3">
+                    <img src="../../../assets/book3.png" style="width:100px;height:100px;">
+                </div>
+                <div *ngIf="book.image == 4">
+                    <img src="../../../assets/book4.png" style="width:100px;height:100px;">
+                </div>
+                <div *ngIf="book.image == 5">
+                    <img src="../../../assets/book5.png" style="width:100px;height:100px;">
+                </div>
             </td>
             <td>
                 {{book.stock}}

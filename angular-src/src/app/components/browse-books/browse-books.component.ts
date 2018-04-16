@@ -17,7 +17,8 @@ export class BrowseBooksComponent implements OnInit {
   admin;
   attributesAscending = [];
   attributesDescending = [];
-
+  categories;
+  
   constructor(
     private validateService: ValidateService,
     private authService: AuthService,
@@ -56,9 +57,27 @@ export class BrowseBooksComponent implements OnInit {
     const attributesDescending4 = { name: "-stock" };
     const attributesDescending5 = { name: "-category" };
     this.attributesDescending.push(attributesDescending1, attributesDescending2, attributesDescending3, attributesDescending4, attributesDescending5)
+
+    this.categories = []
+    const category1 = { id: 1, name: "Comedy" };
+    const category2 = { id: 2, name: "Drama" };
+    const category3 = { id: 3, name: "Horror fiction" };
+    const category4 = { id: 4, name: "Romance" };
+    const category5 = { id: 4, name: "Satire" };
+    const category6 = { id: 4, name: "Tragedy" };
+    const category7 = { id: 4, name: "Fantasy" };
+    const category8 = { id: 4, name: "Adventure" };
+    this.categories.push(category1, category2, category3, category4, category5, category6, category7, category8)
   }
 
   edit(book) {
+
+    //all fields must be filled in
+    if (!this.validateService.validateBookCreate(book)) {
+      this.flashMessage.show('Please fill in all fields', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
+    }
+
     this.authService.updateBook(book).subscribe(data => {
       if (data.success) {
         this.flashMessage.show('Update successful', { cssClass: 'alert-success', timeout: 3000 });

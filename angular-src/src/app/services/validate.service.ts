@@ -18,12 +18,23 @@ export class ValidateService {
 
   validateBookCreate(book)
   {
-      if(book.title == undefined || book.author == undefined || book.price == undefined || book.image == undefined || book.stock == undefined)
+      if(book.title == undefined || book.title == "" || book.author == undefined || book.author == "" || book.price == undefined || book.price == "" || book.image == undefined || book.image == "" || book.stock == undefined || book.stock == "" || book.category == "")
       {
         return false;
       }
       else{
         return true;
+      }
+  }
+
+  validateBookCreateStockPrice(book)
+  {
+      if(book.stock >= 0 && book.price)
+      {
+        return true;
+      }
+      else{
+        return false;
       }
   }
 

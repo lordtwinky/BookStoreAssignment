@@ -29,7 +29,21 @@
         {{book.category}}
       </td>
       <td>
-        {{book.image}}
+          <div *ngIf="book.image == 1">
+              <img src="../../../assets/book1.png" style="width:100px;height:100px;">
+          </div>
+          <div *ngIf="book.image == 2">
+              <img src="../../../assets/book2.png" style="width:100px;height:100px;">
+          </div>
+          <div *ngIf="book.image == 3">
+              <img src="../../../assets/book3.png" style="width:100px;height:100px;">
+          </div>
+          <div *ngIf="book.image == 4">
+              <img src="../../../assets/book4.png" style="width:100px;height:100px;">
+          </div>
+          <div *ngIf="book.image == 5">
+              <img src="../../../assets/book5.png" style="width:100px;height:100px;">
+          </div>
       </td>
       <td>
         {{book.stock}}

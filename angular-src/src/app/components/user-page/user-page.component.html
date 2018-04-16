@@ -1,5 +1,6 @@
 <div>
   <h2>Transactions</h2>
+  <div *ngIf="transactions?.length > 0">
   <ng-container *ngFor="let transaction of transactions; let z = index;">
 
     <div class="panel panel-default">
@@ -18,4 +19,8 @@
       </div>
     </div>
   </ng-container>
+</div>
+<div  *ngIf="transactions?.length == 0">
+<h3>This user currently has no transactions</h3>
+</div>
 </div>
