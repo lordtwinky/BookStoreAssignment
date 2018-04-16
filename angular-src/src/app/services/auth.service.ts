@@ -112,7 +112,7 @@ export class AuthService {
     .map(res => res.json());
   }
 
-  getUserPage(userID){
+  getUserbyID(userID){
     let headers = new Headers();
     return this.http.post('http://localhost:3000/users/getUserbyID', userID, {headers: headers})
     .map(res => res.json());
@@ -149,6 +149,19 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  getTransactionByID(transactionID){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/transactions/getTransactionByID', transactionID, {headers: headers})
+      .map(res => res.json());
+  }
+
+  adjustStockLevels(bookID){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put('http://localhost:3000/books/AdjustStockLevels', bookID, {headers: headers})
+      .map(res => res.json());
+  }
   
 
 }

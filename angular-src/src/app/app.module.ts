@@ -22,6 +22,9 @@ import { ViewCustomersComponent } from './components/view-customers/view-custome
 import { BookPageComponent } from './components/book-page/book-page.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+import { FilterByAuthorPipe } from './pipes/filter-by-author.pipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -53,7 +56,10 @@ const appRoutes: Routes = [
     ViewCustomersComponent,
     BookPageComponent,
     UserPageComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    OrderByPipe,
+    FilterPipe,
+    FilterByAuthorPipe
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, AuthGuard, OrderByPipe, FilterPipe, FilterByAuthorPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,12 +9,20 @@ import {Router} from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  admin = false;
 
   constructor(private authService:AuthService,
     private router:Router,
     private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
+    //check if user is admin
+    this.authService.getProfile().subscribe(profile => {
+      this.admin = profile.user.admin;
+    },
+      err => {
+        return false;
+      })
   }
   
   onLogoutClick()

@@ -33,4 +33,25 @@ export class ValidateService {
     return re.test(email);
   }
 
+  validateReview(review)
+  {
+      if(review.starRating == undefined || review.comment == undefined)
+      {
+        return false;
+      }
+      else{
+        return true;
+      }
+  }
+
+  validateRating(starRating){
+    if(starRating >= 0 && starRating <= 5)
+    {
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
 }

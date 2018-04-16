@@ -1,4 +1,7 @@
-<div>
+<h2> Your shopping cart</h2>
+<br>
+
+<div *ngIf="books?.length > 0">
   <table class="table table-hover table-condensed">
     <tr style="font-weight: bold">
       <td>Title</td>
@@ -40,7 +43,26 @@
       </td>
     </tr>
   </table>
-  <button type="button" (click)="checkout()" class="btn btn-default glyphicon glyphicon-euro" >
-      Checkout
-  </button>
+  <h3> Total price: </h3>
+  {{totalPrice}} euros
+  <br>
+  <br>
+  <h3>Purchase</h3>
+  <form (submit)="checkout()">
+      <div class="form-group">
+        <label>Shipping Address</label>
+        <input type="text" [(ngModel)]="user.shippingAddress" name="shippingAddress" class="form-control">
+      </div>
+    
+      <div class="form-group">
+        <label>Card number</label>
+        <input type="number" [(ngModel)]="user.paymentMethod" name="cardNum" class="form-control">
+      </div>
+      <input type ="submit" class="btn btn-default glyphicon glyphicon-euro" value="Checkout">
+    </form>
+
+
+</div>
+<div *ngIf="books?.length == 0">
+  <h3>You currently have no items in your shopping cart</h3>
 </div>

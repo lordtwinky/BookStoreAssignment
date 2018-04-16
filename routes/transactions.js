@@ -12,7 +12,9 @@ router.post('/createTransaction', (req, res, next) => {
   const userID = req.body.userID;
     let newTransaction = new Transaction({
       books: req.body.books,
-      totalPrice: req.body.totalPrice
+      totalPrice: req.body.totalPrice,
+      shippingAddress: req.body.shippingAddress,
+      cardNumber: req.body.cardNumber
     });
   
     Transaction.addTransaction(newTransaction, (err, transaction) => {
@@ -36,6 +38,19 @@ router.post('/createTransaction', (req, res, next) => {
             });
           }
         });
+      }
+    });
+  });
+
+  router.post('/getTransactionByID', (req, res) => {
+    const transactionID = req.body.transactionID;
+    Transaction.getTransactionById(transactionID, (err, transaction) => {
+      if (err) throw err;
+      if (!transaction) {
+        return res.json({ success: false, msg: "Transaction not found" })
+      }
+      else {
+        res.json({ success: true, transaction: transaction }); // Return success and corresponding book object
       }
     });
   });

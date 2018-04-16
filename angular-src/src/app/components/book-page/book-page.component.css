@@ -8,3 +8,7 @@ display: inline;
 list-style-type: none;
 padding-right: 20px;
 }
+
+#stars {
+  float: left;
+}

@@ -31,6 +31,7 @@ const UserSchema = mongoose.Schema({
     },
     admin:{
         type:Boolean,
+        default: false,
         required: true
     },
     transactions:[{

@@ -1,3 +1,21 @@
-<p>
-  user-page works!
-</p>
+<div>
+  <h2>Transactions</h2>
+  <ng-container *ngFor="let transaction of transactions; let z = index;">
+
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <h3>Date of transaction: {{transaction.date}}</h3>
+      </div>
+      <div class="panel-body">
+        <h3>Total price: {{transaction.totalPrice}}</h3>
+        <h3>Shipping Address: {{transaction.shippingAddress}}</h3>
+        <h3>Card number used: {{transaction.cardNumber}}</h3>
+        <h3>Books purchased: </h3>
+        <div *ngFor="let book of transaction.books;let i = index;">
+          <li>Book id: {{book}}</li>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

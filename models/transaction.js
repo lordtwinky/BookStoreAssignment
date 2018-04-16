@@ -10,11 +10,20 @@ const TransactionSchema = mongoose.Schema({
         ref: 'Book'
     }],
     totalPrice: {
-        type: Number
+        type: Number,
+        required: true
     },
     date: {
         type: Date,
         default: Date.now
+    },
+    shippingAddress:{
+        type:String,
+        required: true
+    },
+    cardNumber:{
+        type:Number,
+        required: true
     }
 
 });

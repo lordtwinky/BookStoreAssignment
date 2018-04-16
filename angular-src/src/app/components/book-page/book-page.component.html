@@ -1,37 +1,66 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
 <div *ngIf="book">
-  <h2 class="page=header">{{book.title}}</h2>
-</div>
-<br>
-<h2>Buy book</h2>
-<button (click)=addToShoppingCart()></button>
+    <div class="well">
+  <div class="well">
+    <h2 class="page=header">{{book.title}}, by {{book.author}}</h2>
+    <br>
+    <div *ngIf="book.image == 1">
+        <img src="../../../assets/book1.png" style="width:100px;height:100px;">
+    </div>
+    <div *ngIf="book.image == 2">
+        <img src="../../../assets/book2.png" style="width:100px;height:100px;">
+    </div>
+    <div *ngIf="book.image == 3">
+        <img src="../../../assets/book3.png" style="width:100px;height:100px;">
+    </div>
+    <div *ngIf="book.image == 4">
+        <img src="../../../assets/book4.png" style="width:100px;height:100px;">
+    </div>
+    <div *ngIf="book.image == 5">
+        <img src="../../../assets/book1.png" style="width:100px;height:100px;">
+    </div>
+    <br> Price: {{book.price}} euros
+    <br> Average rating: {{averageRating}}
+    <div *ngFor="let star of stars;" id="stars">
+      <li>
+        <div class="fa fa-star" ng-value="true"></div>
+      </li>
+    </div>
+    <div *ngFor="let star of antiStars;" id="stars">
+      <li>
+        <div class="fa fa-star" ng-value="false"></div>
+      </li>
+    </div>
+  </div>
 
-<h2>Write a Review</h2>
-<div class="form-group">
-  <label>Rate the book from 0-5</label>
-  <input type="number" [(ngModel)]="starRating" id="starRating" step="0.1" max="5" placeholder="Rate 1 - 5" class="form-control">
-  <label>Write a review</label>
-  <textarea [(ngModel)]="comment" name="comment" rows="10" cols="30" class="form-control" align="right"></textarea>
-  <button (click)=reviewSubmit()></button>
-</div>
+  <div class="well">
+    <h3>Add book to shopping cart</h3>
+    <button mat-raised-button color="primary" (click)=addToShoppingCart()>Purchase</button>
+  </div>
 
-<div *ngFor="let star of stars;">
-  <li>
-    <div class="fa fa-star" ng-value="true"></div>
-  </li>
-</div>
+  <div class="well">
+    <h3>Write a Review</h3>
+    <div class="form-group">
+      <label>Rate the book from 0-5</label>
+      <input type="number" [(ngModel)]="starRating" id="starRating" step="0.1" max="5" placeholder="Rate 0 - 5" class="form-control">
+      <label>Write a comment</label>
+      <textarea [(ngModel)]="comment" name="comment" rows="10" cols="30" class="form-control" align="right"></textarea>
+      <button mat-raised-button color="primary" (click)=reviewSubmit()>Submit</button>
+    </div>
+  </div>
 
-<div *ngFor="let star of stars;">
-  <li>
-    <div class="fa fa-star" ng-value="true"></div>
-  </li>
-</div>
-
-<h2>Previous reviews</h2>
-
-<div *ngFor="let review of reviews;">
-  <li>{{review.comment}}</li>
-  <li>{{review.starRating}}</li>
-  <li>{{review.user}}</li>
+  <div class="well">
+    <h2>Previous reviews</h2>
+    <div *ngIf="reviews?.length > 0">
+      <div *ngFor="let review of reviews;">
+        Comment: {{review.comment}}, Rating given: {{review.starRating}}, Written by {{review.user}}
+      </div>
+    </div>
+    <div *ngIf="reviews?.length == 0">
+      <h4>Currently no reviews for this book.</h4>
+    </div>
+  </div>
+  </div>
 </div>

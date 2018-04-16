@@ -16,6 +16,8 @@ export class ShoppingCartComponent implements OnInit {
   shoppingCartID;
   shoppingCart;
   books = [];
+  totalPrice = 0;
+  user;
 
   constructor(
     private validateService: ValidateService,
@@ -29,6 +31,7 @@ export class ShoppingCartComponent implements OnInit {
     this.authService.getProfile().subscribe(profile => {
       this.IDUser = profile.user._id;
       this.shoppingCartID = profile.user.shoppingCart;
+      this.user = profile.user;
       const shoppingCartI = {
         shoppingCartID: this.shoppingCartID
       }
@@ -40,6 +43,7 @@ export class ShoppingCartComponent implements OnInit {
           }
           this.authService.getBookPage(bookI).subscribe(data => {
             this.books.push(data.book);
+            this.totalPrice += data.book.price
           },
             err => {
               return false
@@ -56,7 +60,10 @@ export class ShoppingCartComponent implements OnInit {
       });
   }
 
-  remove(bookID, i){
+  remove(bookID, i) {
+    //make change to totalprice
+
+    this.totalPrice -= this.books[i].price
 
     //remove the deleted item from front-end
     this.books.splice(i, 1);
@@ -72,25 +79,44 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
-  checkout(){
+  checkout() {
 
-    // //remove from front-end
-    // this.books = [];
-
-    // //remove from back-end
-    // const purchase = {
-    //   shoppingCartID: this.shoppingCartID
-    // }
-    // this.authService.updateShoppingCartPurchase(purchase).subscribe(data => {
-    // });
-
+    // create transaction
     const transaction = {
       userID: this.IDUser,
-      books: this.books
+      books: this.books,
+      totalPrice: this.totalPrice,
+      shippingAddress: this.user.shippingAddress,
+      cardNumber: this.user.paymentMethod
+    }
+    for (var i = 0; i < this.books.length; i++) {
+      const bookI = {
+        bookID: this.books[i]._id
+      }
+      this.authService.adjustStockLevels(bookI).subscribe(data => {
+      });
     }
     this.authService.createTransaction(transaction).subscribe(data => {
+      this.removeItems()
     });
-    
+  }
+
+  removeItems() {
+    //remove from front-end
+    this.books = [];
+
+    //remove from back-end
+    const purchase = {
+      shoppingCartID: this.shoppingCartID
+    }
+    this.authService.updateShoppingCartPurchase(purchase).subscribe(data => {
+      if (data.success) {
+        this.flashMessage.show('Your purchase was successful', { cssClass: 'alert-success', timeout: 3000 });
+      }
+      else {
+        this.flashMessage.show('Something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
+      }
+    });
   }
 
 }

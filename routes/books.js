@@ -56,7 +56,7 @@ router.post('/getBookbyID', (req, res) => {
   });
 });
 
-router.put('/updateGroup', (req, res, next) => {
+router.put('/updateBook', (req, res, next) => {
   const bookID = req.body._id;
   const title = req.body.title;
   const author = req.body.author;
@@ -84,6 +84,32 @@ router.put('/updateGroup', (req, res, next) => {
     }
 
   );
+});
+
+router.put('/AdjustStockLevels', (req, res) => {
+  const bookID = req.body.bookID;
+  Book.getBookById(bookID, (err, book) => {
+    if (err) throw err;
+    if (!book) {
+      return res.json({ success: false, msg: "Book not found" })
+    }
+    else {
+      Book.findOneAndUpdate({ _id: bookID },
+        {
+          $set: {
+            stock: book.stock-1
+          }
+        }, (err, newBook) => {
+          if (err)
+            res.json({ success: false, err: err, msg: 'Failed to update stock of book' });
+          else {
+            res.json({ success: true, msg: 'Stock Updated'});
+          }
+        }
+    
+      );
+    }
+  });
 });
 
 

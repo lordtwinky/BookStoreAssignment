@@ -1,6 +1,29 @@
-<h2>Browse books</h2>
-
-<div>
+<div *ngIf="admin == true">
+    <h2>Update items</h2>
+    <br>
+    <div class="bar">
+        <form id="searchByTitle">
+            <label> Search for Title: </label>
+            <input type="text" [(ngModel)]="titleSearch" name="titleSearch" />
+        </form>
+    </div>
+    <div class="bar">
+        <form id="searchByAuthor">
+            <label> Search for Author: </label>
+            <input type="text" [(ngModel)]="authorSearch" name="authorSearch" />
+        </form>
+    </div>
+    <br>
+    <div class="bar">
+        <label for="setting">Order ascending by:</label>
+        <select [(ngModel)]="attributeSelected" name="attributeSelected" class="select-privacy" id="attributeSelected" required>
+            <option *ngFor="let attribute of attributesAscending" [value]="attribute.name">{{attribute.name}}</option>
+        </select>
+        <label for="setting">Order descending by:</label>
+        <select [(ngModel)]="attributeSelected" name="attributeSelected" class="select-privacy" id="attributeSelected" required>
+            <option *ngFor="let attribute of attributesDescending" [value]="attribute.name">{{attribute.name}}</option>
+        </select>
+    </div>
     <table class="table table-hover table-condensed">
         <tr style="font-weight: bold">
             <td style="width:0%" align="center">Title</td>
@@ -12,7 +35,7 @@
             <td style="width:0%" align="center">Edit</td>
 
         </tr>
-        <tr *ngFor="let book of books">
+        <tr *ngFor="let book of books | orderBy: attributeSelected | filter: titleSearch | filterByAuthor: authorSearch; let i = index">
             <td>
                 <input type="text" [(ngModel)]="book.title" name="title" class="input-title">
             </td>
@@ -43,7 +66,32 @@
 </div>
 
 
-<div>
+<div *ngIf="admin == false">
+    <h2>Browse books</h2>
+    <br>
+    <div class="bar">
+        <form id="searchByTitle">
+            <label> Search for Title: </label>
+            <input type="text" [(ngModel)]="titleSearch" name="titleSearch" />
+        </form>
+    </div>
+    <div class="bar">
+        <form id="searchByAuthor">
+            <label> Search for Author: </label>
+            <input type="text" [(ngModel)]="authorSearch" name="authorSearch" />
+        </form>
+    </div>
+    <br>
+    <div class="bar">
+        <label for="setting">Order ascending by:</label>
+        <select [(ngModel)]="attributeSelected" name="attributeSelected" class="select-privacy" id="attributeSelected" required>
+            <option *ngFor="let attribute of attributesAscending" [value]="attribute.name">{{attribute.name}}</option>
+        </select>
+        <label for="setting">Order descending by:</label>
+        <select [(ngModel)]="attributeSelected" name="attributeSelected" class="select-privacy" id="attributeSelected" required>
+            <option *ngFor="let attribute of attributesDescending" [value]="attribute.name">{{attribute.name}}</option>
+        </select>
+    </div>
     <table class="table table-hover table-condensed">
         <tr style="font-weight: bold">
             <td>Title</td>
@@ -51,14 +99,13 @@
             <td>Price</td>
             <td>Category</td>
             <td>Image</td>
-            <td >Stock</td>
-            <td >Edit</td>
+            <td>Stock</td>
 
         </tr>
-        <tr *ngFor="let book of books;let i = index;">
+        <tr *ngFor="let book of books | orderBy: attributeSelected | filter: titleSearch | filterByAuthor: authorSearch; let i = index">
             <td>
                 <a [routerLink]="['/BookPage', book._id]">
-                  {{book.title}}
+                    {{book.title}}
                 </a>
             </td>
             <td>
@@ -75,18 +122,6 @@
             </td>
             <td>
                 {{book.stock}}
-            </td>
-            <td style="white-space: nowrap">
-                <form (submit)="addShoppingBasket(book._id, i)" class="form-buttons form-inline">
-                    <button type="submit" class="btn btn-default glyphicon glyphicon-shopping-cart">
-                        Add to shopping cart
-                    </button>
-                </form>
-
-                <button type="button" (click)="review(book._id, i)" class="btn btn-default glyphicon glyphicon-book">
-                    View and review
-                </button>
-
             </td>
         </tr>
     </table>

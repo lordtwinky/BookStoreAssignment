@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
+    // location.reload();
   }
 
   onLoginSubmit()
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
           cssClass: 'alert-success',
            timeout: 5000});
          this.router.navigate(['/dashboard']);
-
+         location.reload();
       }
       else 
        {
